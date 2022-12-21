@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style></style>
+    <title>Get Cat !!!</title>
+</head>
+
+<body>
+    <h1>Get Cat !!!</h1>
+    <img id="car" width="220" height="277" src="./car.png" alt="The Car" style="transform: scaleX(-1);">
+    <canvas id="myCanvas" width="480" height="300"></canvas>
+    <img id="cat" width="220" height="277" src="./cat.png" alt="The Cat" style="display: none;transform: scaleX(-0.5);">
+    <img id="box" width="220" height="100" src="./box.png" alt="The Box" style="transform: scaleX(-1);">
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var x = canvas.width;
+        var y = 190;
+        var dx = -2;
+        var dy = 0;
+        var img = document.getElementById("cat");
+
+        function drawBall() {
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.lineWidth = 5;
+            for (var i = 0; i < 3; i++) {
+                if (x < (300 - 100 * i)) {
+                    ctx.strokeStyle = "white";
+                } else {
+                    ctx.strokeStyle = "black";
+                }
+                ctx.beginPath();
+                ctx.arc(300 - 100 * i, 250, 5, 0, 1.5 * Math.PI);
+                ctx.closePath();
+                ctx.stroke();
+            }
+            ctx.stroke();
+            ctx.drawImage(img, x, y);
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (x < 0) {
+                x = canvas.width;
+            }
+            drawBall();
+            x += dx;
+        }
+
+        setInterval(draw, 10);
+    </script>
+</body>
+
+</html>
